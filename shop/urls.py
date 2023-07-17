@@ -1,12 +1,15 @@
-
-
 from django.urls import path
-from . import views
 
-app_name = 'shop'
+from shop import views
+
+app_name = "shop"
 
 urlpatterns = [
-    path(r'', views.product_list, name='product_list'),
-    path(r'^(?P<category_slug>[-\w]+)/$', views.product_list, name='product_list_by_category'),
-    path(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.product_detail, name='product_detail'),
+	path('', views.home_page, name='home_page'),
+	path('<slug:slug>', views.product_detail, name='product_detail'),
+	path('add/favorites/<int:product_id>/', views.add_to_favorites, name='add_to_favorites'),
+	path('remove/favorites/<int:product_id>/', views.remove_from_favorites, name='remove_from_favorites'),
+	path('favorites/', views.favorites, name='favorites'),
+	path('search/', views.search, name='search'),
+	path('filter/<slug:slug>/', views.filter_by_category, name='filter_by_category'),
 ]
